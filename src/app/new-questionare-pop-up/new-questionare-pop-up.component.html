@@ -1,0 +1,12 @@
+<h2> New Question</h2>
+<label for="fname">Enter the Question</label><br>
+<input type="text" #name><br>
+<br />
+<br />
+<button class="btn btn-primary" id="yes" (click)="confirm(name.value)">
+    Save
+</button>
+
+<button class="btn btn-primary" id="yes" (click)="cancel()" >
+    Cancel
+</button>

@@ -1,0 +1,17 @@
+<h2> Edit Template</h2>
+<label for="fname">Name</label><br>
+<input type="text" #name><br>
+<label for="lname">Description</label><br>
+<input type="text" #description>
+<br />
+<br />
+<button class="btn btn-primary" id="yes" (click)="confirm(name.value,description.value)">
+    Save
+</button>
+
+<button class="btn btn-primary" id="yes" (click)="cancel()" >
+    Cancel
+</button>
+
+
+

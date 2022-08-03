@@ -1,0 +1,11 @@
+<h2> Add Student </h2>
+<label for="fname">Enter the 8 digit student ID for {{data.CourseName}}</label><br>
+<input type="text" #name><br>
+<br />
+<button class="btn btn-primary" id="yes" (click)="confirm(name.value)">
+    Add
+</button>
+
+<button class="btn btn-primary" id="yes" (click)="cancel()" >
+    Cancel
+</button>

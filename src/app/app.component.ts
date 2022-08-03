@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'peer-review-frontend';
+  isUserLoggedIn = "false";
+
 }

@@ -1,0 +1,14 @@
+<h2> Edit Course</h2>
+<label for="fname">Course Name</label><br>
+<input type="text" #name><br>
+<label for="lname">Credits</label><br>
+<input type="number" min="1" max="20" #description>
+<br />
+<br />
+<button class="btn btn-primary" id="yes" (click)="confirm(name.value,description.value)">
+    Save
+</button>
+
+<button class="btn btn-primary" id="yes" (click)="cancel()" >
+    Cancel
+</button>

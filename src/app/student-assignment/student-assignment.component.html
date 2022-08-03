@@ -1,0 +1,26 @@
+
+<mat-grid-list  cols="2" rowHeight="2:1" >
+    <mat-grid-tile *ngFor="let ass of allAssignments"  >
+     <mat-card style="width: 100%;">
+       
+      <mat-card-header>
+          <mat-card-title>{{ass.TaskName}}</mat-card-title>
+          <mat-card-subtitle>{{commonfunction.calculateDiff(ass.SubmissionDate )}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content><p> {{ass.Explaination}} </p></mat-card-content>
+      <mat-card-content><p> Weightage:- {{ass.Weightage}} percent</p></mat-card-content>
+    
+      <mat-card-content><a routerLink="/student/submission" [state]="ass" >
+        Submit
+      </a> </mat-card-content>
+      <mat-card-content><a routerLink="/student/peer/review" [state]="ass" >
+        Peer Review
+      </a> </mat-card-content>
+         
+       
+        <mat-card-footer>  
+    </mat-card-footer>
+      
+     </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
