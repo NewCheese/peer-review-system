@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: "http://172.20.10.8:4444",
+  apiUrl: "peer-review-system-uog.herokuapp.com",
   production: true
 };
