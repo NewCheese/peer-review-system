@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'peer-review-frontend';
-  isUserLoggedIn = "false";
-
+  title = 'peer-review';
 }
