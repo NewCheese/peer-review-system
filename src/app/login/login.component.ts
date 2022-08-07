@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiServicesService, User} from '../api-services.service'
 import {MatSnackBar,  MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import {Router} from "@angular/router"
+import {AuthenticationService} from "../authentication.service"
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private apiService: ApiServicesService,
     private _snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router,
+    private authService : AuthenticationService) { }
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   durationInSeconds = 5;
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   public login(username,password){
-    this.apiService.login(username,password).subscribe((res)=>{
+    this.authService.login(username,password).subscribe((res)=>{
       console.log(res);
       if("message" in res){
         this.openSnackBar(res["message"]);
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("userType",this.loggedIn.UserType)
       localStorage.setItem("EmailAddress",this.loggedIn.EmailAddress)
       localStorage.setItem('isUserLoggedIn', "true"); 
+      localStorage.setItem("token", "my-super-secret-token-from-server");
       if(this.loggedIn.UserType == "Teacher"){
         this.router.navigate(['/course']);
         return;
@@ -45,5 +48,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['student/courses']);
       return;
     });
+  }
+  public handlePasswordForgot(){
+    this.router.navigate(['forgotPassword']);
   }
 }

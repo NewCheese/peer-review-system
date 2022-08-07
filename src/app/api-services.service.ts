@@ -66,7 +66,13 @@ export class ApiServicesService {
   constructor(private http: HttpClient) { 
 
   }
-  
+  // /reset/password
+
+  public resetPassword(StudentID:number): Observable<any> {
+    
+    return this.http.post<any>(environment.apiUrl+"reset/password/"+StudentID,null)
+}
+
  public postFile(fileToUpload: File,AssignmentID:number,StudentID:number): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('filename',fileToUpload.name);
@@ -76,12 +82,7 @@ export class ApiServicesService {
 
     return this.http.post<any>(environment.apiUrl+"add/submission/", formData)
 }
-public login(username: string, password: string): Observable<User> {
-  return this.http.post<User>( environment.apiUrl+ 'login', {
-    username,
-    password
-  });
-}
+
 
 public getQuestionare(assignmentId):Observable<any[]> {
   return this.http.get<any[]>(environment.apiUrl+'/get/questionare/'+assignmentId)

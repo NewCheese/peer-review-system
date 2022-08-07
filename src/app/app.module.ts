@@ -41,6 +41,7 @@ import { ManageStudentsComponent } from './manage-students/manage-students.compo
 import { ManageStudentsPopUpComponent } from './manage-students-pop-up/manage-students-pop-up.component';
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     StudentPeerReviewComponent,
     ManageStudentsComponent,
     ManageStudentsPopUpComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
