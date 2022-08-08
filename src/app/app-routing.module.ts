@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthenticationGuardGuard } from './authentication-guard.guard';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 const routes: Routes = [
+  { path: "", component: LoginComponent },  
 { path: "course", component: CoursesComponent , canActivate: [AuthenticationGuardGuard]},
 { path: "template", component: TemplateComponent , canActivate: [AuthenticationGuardGuard]},
 {path:"questionare",component:QuestionareComponent, canActivate: [AuthenticationGuardGuard]},

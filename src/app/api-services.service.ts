@@ -82,7 +82,13 @@ export class ApiServicesService {
 
     return this.http.post<any>(environment.apiUrl+"add/submission/", formData)
 }
+public getSubmission(assignmentId,student_id):Observable<any[]> {
+  return this.http.get<any[]>(environment.apiUrl+'/get/submission/'+assignmentId+'/'+student_id)
+}
 
+public getSubmissions(assignmentId):Observable<any[]> {
+  return this.http.get<any[]>(environment.apiUrl+'/get/submissions/'+assignmentId)
+}
 
 public getQuestionare(assignmentId):Observable<any[]> {
   return this.http.get<any[]>(environment.apiUrl+'/get/questionare/'+assignmentId)
@@ -140,6 +146,23 @@ public getQuestionare(assignmentId):Observable<any[]> {
     return this.http.post<UpdateTemplate>(environment.apiUrl+'/add/template/',{
       "Name":name ,
       "Description":description
+    })
+  }
+  public downloadFile(path:string):Observable<any>{
+    return this.http.get<any>(environment.apiUrl+'/download/'+path)
+  }
+  public postPeerReview(
+    reviewerStudentID : number ,
+   submissionStudentID : number ,
+   Sequence :  number ,
+   Answer : String ,
+   AssignmentID : number ):Observable<any>{
+    return this.http.post<any>(environment.apiUrl+'/post/peer/review',{
+      "reviewerStudentID":reviewerStudentID ,
+      "submissionStudentID":submissionStudentID,
+      "Sequence":Sequence ,
+      "Answer":Answer,
+      "AssignmentID":AssignmentID 
     })
   }
   public manageStudents(studentID:string,CourseID:string):Observable<studentCourses>{

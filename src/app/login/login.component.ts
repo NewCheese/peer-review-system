@@ -9,7 +9,7 @@ import {AuthenticationService} from "../authentication.service"
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+ 
   constructor(private apiService: ApiServicesService,
     private _snackBar: MatSnackBar,
     private router: Router,
@@ -41,6 +41,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("EmailAddress",this.loggedIn.EmailAddress)
       localStorage.setItem('isUserLoggedIn', "true"); 
       localStorage.setItem("token", "my-super-secret-token-from-server");
+      localStorage.setItem("ID",this.loggedIn.ID.toString());
+      this.authService.sendMessage(this.loggedIn.UserType);
       if(this.loggedIn.UserType == "Teacher"){
         this.router.navigate(['/course']);
         return;
@@ -52,4 +54,6 @@ export class LoginComponent implements OnInit {
   public handlePasswordForgot(){
     this.router.navigate(['forgotPassword']);
   }
+
+ 
 }

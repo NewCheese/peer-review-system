@@ -86,7 +86,7 @@ export class ManageStudentsComponent implements OnInit {
   public setStudentName(ID:number){
     console.log(ID);
     for (var val of this.allStudents) {
-      console.log(val);
+      
       if(val["ID"] == ID){
         return val["FirstName"]+ " "+val["LastName"];
       }
@@ -98,9 +98,9 @@ export class ManageStudentsComponent implements OnInit {
     return all[0];
   }
   public setStudentID(ID:number){
-    console.log(ID);
+   
     for (var val of this.allStudents) {
-      console.log(val);
+      
       if(val["ID"] == ID){
         let studentID = this.stripEmailAddress(val["EmailAddress"])
         return studentID;

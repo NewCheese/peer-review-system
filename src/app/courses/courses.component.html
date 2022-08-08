@@ -1,6 +1,6 @@
 
-<button mat-stroked-button (click)="openPopUp()" >Add Course</button>
-<mat-grid-list  cols="2" rowHeight="3:1.2" >
+<!-- <button mat-stroked-button (click)="openPopUp()" >Add Course</button> -->
+<!-- <mat-grid-list  cols="2" rowHeight="3:1.2" >
     <mat-grid-tile *ngFor="let course of allCourses"  >
      <mat-card style="width: 100%;">
        
@@ -36,4 +36,49 @@
       
      </mat-card>
     </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->
+
+<button mat-stroked-button (click)="openPopUp()" >Add Course</button>
+
+
+
+<mat-divider vertical style="height:30px"></mat-divider>
+
+
+<mat-card class="example-card" *ngFor="let ass of allCourses">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Module : {{ass.CourseName}}</mat-card-title>
+    <mat-card-subtitle>{{commonfunction.calculateDiff(ass.CreationDate )}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <p>
+        Credits : {{ass.Credits}} 
+      </p>
+    </mat-card-subtitle>
+  
+  </mat-card-header>
+
+  <button mat-raised-button color="accent" style="margin: 1%;">
+    <a routerLink="/addStudents" [state]="course">
+      <button mat-stroked-button> Manage Students </button>
+    </a> 
+  </button>
+
+  <button mat-raised-button color="accent" style="margin: 1%;" *ngIf="ass.hasAssignment">
+    <mat-icon>work</mat-icon>
+    <a routerLink="/assignment" [state]="ass" >
+    View Assignment
+    </a>  
+  </button>
+  <button mat-raised-button color="accent" style="margin: 1%;" *ngIf="!ass.hasAssignment">
+    <mat-icon>work</mat-icon>
+    <a routerLink="/create/assignment" [state]="ass" >
+    Add an Assignment
+    </a>  
+  </button>
+  <br />
+
+  <button mat-raised-button color="accent" (click)="editCourse(ass)" style="margin: 1%;">Edit</button>
+        
+  <button mat-stroked-button color="accent" (click)="deleteCourse(ass)">Delete</button>
+  <mat-card-content>

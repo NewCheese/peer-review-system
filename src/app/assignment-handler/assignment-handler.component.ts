@@ -118,7 +118,7 @@ public onClickSubmit(Assignment:string,Explaination:string,Weightage,submission:
                          }
                          else {
                           this.apiService.postAssignment(
-                            this.state.CourseID,
+                            this.state.ID,
                             temp,
                            Assignment,
                             Explaination ,
@@ -128,7 +128,7 @@ public onClickSubmit(Assignment:string,Explaination:string,Weightage,submission:
                           .subscribe((res)=>{
                            console.log(res);
                            this.openSnackBar("Record Added Successfully, it will reflect in some time");
-                           this.router.navigateByUrl('/assignment', { state: { ID:this.state.CourseID} });
+                           this.router.navigateByUrl('/assignment', { state: { ID:this.state.ID} });
                           })
                         }
 

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of,BehaviorSubject } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../environments/environment'
-
 export interface User{
   EmailAddress: string;
   FirstName: string;
@@ -18,8 +17,7 @@ export interface User{
   providedIn: 'root'
 })
 export class AuthenticationService {
-  fakeUsername: string = "2659162W";
-  fakePassword: string = "Panku@109";
+  private subject = new BehaviorSubject<any>("");
   constructor(private http: HttpClient) { }
 
   public login(username: string, password: string): Observable<User> {
@@ -38,4 +36,11 @@ export class AuthenticationService {
     }
     return false;
   }
+  sendMessage(message: string) {
+    this.subject.next({ userType: message });
+  }
+
+dynamicData(): Observable<any> {
+    return this.subject.asObservable();
+}
 }

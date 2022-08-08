@@ -1,18 +1,32 @@
 
-<mat-grid-list  cols="2" rowHeight="2:1" >
-    <h2>
-        Dashboard
+<div class="example-card">
+    <h1 class="md-display-3">Dashboard</h1>
+    <h2 class="md-display-3">This Page consists of all the enrolled modules. <br >
+    Click on View Assignments for viewing and submitting Assignments and its respective peer review before the deadline.
     </h2>
-    <mat-grid-tile *ngFor="let course of this.enrolledCourses"  >
-     <mat-card style="width: 100%;">
-       
-      <mat-card-header>
-          <mat-card-title>Course Name {{this.setCourseName(course.CourseID)}}</mat-card-title>
-          <mat-card-subtitle> <a routerLink="/student/assignment"[state]="{
-            'CourseID':course.CourseID
-            }" >Click to view Assignments</a></mat-card-subtitle>
-      </mat-card-header>
-        
-     </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+</div>
+<mat-divider vertical style="height:30px"></mat-divider>
+<mat-card class="example-card" *ngFor="let card of this.enrolledCourses">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Module : {{setCourseName(card.CourseID)}}</mat-card-title>
+    <mat-card-subtitle>
+        <a routerLink="/student/assignment"[state]="{
+            'CourseID':card.CourseID
+            }" >View Assignments</a>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      <p>
+        Credits : {{setCredits(card.CourseID)}}
+      </p>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <i class="material-icons">assignment</i>
+    <i class="material-icons">assessment</i>
+  </mat-card-actions>
+</mat-card>
+

@@ -1,26 +1,43 @@
+<div class="example-card">
+  <h1 class="md-display-3">Dashboard</h1>
+  <h2 class="md-display-3">This Page consists of all the pending Assignments. <br >
+    For each of the assignment, you can submit or peer review before the deadline.
+  </h2>
+</div>
+<mat-divider vertical style="height:30px"></mat-divider>
 
-<mat-grid-list  cols="2" rowHeight="2:1" >
-    <mat-grid-tile *ngFor="let ass of allAssignments"  >
-     <mat-card style="width: 100%;">
-       
-      <mat-card-header>
-          <mat-card-title>{{ass.TaskName}}</mat-card-title>
-          <mat-card-subtitle>{{commonfunction.calculateDiff(ass.SubmissionDate )}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content><p> {{ass.Explaination}} </p></mat-card-content>
-      <mat-card-content><p> Weightage:- {{ass.Weightage}} percent</p></mat-card-content>
-    
-      <mat-card-content><a routerLink="/student/submission" [state]="ass" >
-        Submit
-      </a> </mat-card-content>
-      <mat-card-content><a routerLink="/student/peer/review" [state]="ass" >
-        Peer Review
-      </a> </mat-card-content>
-         
-       
-        <mat-card-footer>  
-    </mat-card-footer>
-      
-     </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+<mat-card class="example-card" *ngFor="let ass of this.allAssignments">
+<mat-card-header>
+  <div mat-card-avatar class="example-header-image"></div>
+  <mat-card-title>Assignment Name : {{ass.TaskName}}</mat-card-title>
+  <mat-card-subtitle>
+    {{ass.Explaination}}
+  </mat-card-subtitle>
+  <mat-card-subtitle>
+    <p>
+      Weightage:- {{ass.Weightage}} percent
+    </p>
+  </mat-card-subtitle>
+
+</mat-card-header>
+<button mat-raised-button color="accent" style="left:4%;">
+  <mat-icon>assignment</mat-icon>
+  <a routerLink="/student/submission" [state]="ass" >
+    Submit
+  </a>
+</button>
+
+<button mat-raised-button color="accent" style="left:5%;">
+  <mat-icon>work</mat-icon>
+  <a routerLink="/student/peer/review" [state]="ass" >
+    Peer Review
+  </a>
+</button>
+
+<mat-card-content>
+  
+</mat-card-content>
+<mat-card-actions class="example-card">
+  <span style="color:red">{{commonfunction.calculateTimeDiff(ass.SubmissionDate )}} Left for submission</span>
+</mat-card-actions>
+</mat-card>

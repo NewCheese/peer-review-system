@@ -48,7 +48,7 @@ export class StudentCoursesComponent implements OnInit {
     });
   }
 public  viewResults() : any{
-  this.apiService.enrolledCourses(3)
+  this.apiService.enrolledCourses(Number(localStorage.getItem("ID")))
   .subscribe((res)=>{
     console.log(res);
     this.enrolledCourses = res;
@@ -70,7 +70,16 @@ public setCourseName(course_id){
       return val["CourseName"];
     }
   }
-    return null;
+   
+}
+
+public setCredits(course_id){
+  for (var val of this.Courses) {
+    if(val["ID"] == course_id){
+      return val["Credits"];
+    }
+  }
+   
 }
 
 

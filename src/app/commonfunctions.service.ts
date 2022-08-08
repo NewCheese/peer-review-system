@@ -6,7 +6,39 @@ import { Injectable } from '@angular/core';
 export class CommonfunctionsService {
 
   constructor() { }
-
+  public calculateTimeDiff(dateSent){
+    let currentDate = new Date();
+    dateSent = new Date(dateSent);
+    var diffMs =  dateSent.valueOf() -currentDate.valueOf() ;
+    var diffDays = Math.floor(diffMs / 86400000); // days
+  var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+  var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+    if(diffDays == 0){
+      if(diffHrs==0){
+        if(diffMins==0){
+          return "Just now";
+        }
+        else {
+          if(diffMins!=1){
+            return diffMins +" minutes";
+          }
+          return diffMins +" minute";
+        }
+      }
+      else {
+        if(diffHrs!=1){
+          return diffHrs +" hours";
+        }
+        return diffHrs +" hour";
+      }
+    }
+    else {
+      if(diffDays!=1){
+        return diffDays +" days";
+      }
+      return diffDays +" day ";
+    }
+   }
   public calculateDiff(dateSent){
     let currentDate = new Date();
     dateSent = new Date(dateSent);
@@ -41,3 +73,5 @@ export class CommonfunctionsService {
     }
    }
 }
+
+

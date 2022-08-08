@@ -42,8 +42,7 @@ import { ManageStudentsPopUpComponent } from './manage-students-pop-up/manage-st
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +88,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
