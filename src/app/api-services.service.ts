@@ -130,6 +130,13 @@ public getQuestionare(assignmentId):Observable<any[]> {
       "Question":question 
     })
   }
+  public putStudent(user_id:number,password:string, firstName:string, Lastname:string):Observable<User>{
+    return this.http.put<User>(environment.apiUrl+'/set/profile/'+user_id,{
+      "Password":password,
+      "FirstName":firstName,
+      "LastName":Lastname
+    })
+  }
 
   public deleteTemplate(Id:number):Observable<any>{
     return this.http.delete<any>(environment.apiUrl+'/delete/template/'+Id);

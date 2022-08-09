@@ -1,0 +1,24 @@
+<div class="example-form" style="margin-left: 40%; margin-top: 10%; border: 1px;">  
+   
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input #password matInput type="Password">
+    </mat-form-field>
+    <br />
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label> Enter Password Again</mat-label>
+      <input #repassword matInput type="password">
+    </mat-form-field>
+    <br />
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> First Name</mat-label>
+        <input #firstName matInput >
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label> Last Name</mat-label>
+        <input #lastName matInput>
+      </mat-form-field>
+      <br />  
+    <button  mat-flat-button (click)="onClickSubmit(password.value,repassword.value,firstName.value,lastName.value)" color="accent">Save</button>
+</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
+import { SetProfileComponent } from './set-profile/set-profile.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +13,7 @@ export class AppComponent {
 
 
   showHideNav(event){
-    this.isShow= !((event instanceof LoginComponent) || (event instanceof ForgotPasswordComponent));                                                            
+    this.isShow= !((event instanceof LoginComponent) || (event instanceof ForgotPasswordComponent)|| (event instanceof SetProfileComponent));                                                            
 } 
 
 }

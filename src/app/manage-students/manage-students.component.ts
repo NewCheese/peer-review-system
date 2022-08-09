@@ -88,10 +88,13 @@ export class ManageStudentsComponent implements OnInit {
     for (var val of this.allStudents) {
       
       if(val["ID"] == ID){
+        if(!val["FirstName"] || !val["LastName"]){
+            return "Yet to set"
+        }
         return val["FirstName"]+ " "+val["LastName"];
       }
     }
-      return null;
+      return "N/A";
   }
   public stripEmailAddress(Email:string){
     let all = Email.split("@");
@@ -113,6 +116,53 @@ export class ManageStudentsComponent implements OnInit {
       return("Added");
     }
 return("Pending");
+  }
+  public addStudents(){
+
+  }
+
+  public changeListener(files: FileList){
+    console.log(files);
+    var i = 0;
+    if(files && files.length > 0) {
+       let file : File = files.item(0); 
+         console.log(file.name);
+         console.log(file.size);
+         console.log(file.type);
+         let reader: FileReader = new FileReader();
+         reader.readAsText(file);
+         reader.onload = (e) => {
+            let csv: string = reader.result as string;
+            
+            let csvRecordsArray = (<string>csv).split(/\r\n|\n/);
+            console.log(csvRecordsArray);
+           for(var row in csvRecordsArray){
+             
+            if(i==0){
+              let ans =  csvRecordsArray[row].split(",");
+              console.log(ans);
+              if(ans.length >1){
+                this.openSnackBar("Invalid CSV Format");
+              }
+              i = 1;
+              continue;
+            }
+            var result = csvRecordsArray[row]
+            if(result.length != 8 ){
+              continue;
+            }
+            this.apiService.manageStudents(result,this.state.ID).subscribe((res)=>{
+              if("message" in res){
+                this.openSnackBar(res["message"]);
+                return;
+              }
+              this.openSnackBar("Record added successfully");
+               this.ngOnInit(); 
+            });
+    
+           }
+         }
+      }
   }
 }
 

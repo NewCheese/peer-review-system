@@ -96,5 +96,8 @@ public openPopUp(){
   });;
 
 }
+public downloadResults(ass){
+console.log("Download Results");
+}
 }
 

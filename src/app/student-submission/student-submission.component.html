@@ -3,13 +3,15 @@
     <label for="file">Choose File</label>
     <input type="file"
            id="file"
-           (change)="handleFileInput($event.target.files)" [attr.disabled]="this.Sub.hasOwnProperty('ID')">
+           (change)="handleFileInput($event.target.files)" [formControl]="inputFormControl">
 
-    <button (click)="this.uploadFileToActivity()" [attr.disabled]="this.Sub.hasOwnProperty('ID')">
+    <button (click)="this.uploadFileToActivity()" [formControl]="inputFormControl">
         Submit
     </button>       
 </div>
 
-<h1>
-    You already have submitted this assignment {{commonfunction.calculateDiff(this.Sub["SubmissionDate"])}}
-</h1>
+<h1 *ngIf="SubmissionError"> You already have submitted this assignment {{commonfunction.calculateDiff(this.Sub["SubmissionDate"]) </h1>
+   
+
+
+

@@ -42,7 +42,8 @@ import { ManageStudentsPopUpComponent } from './manage-students-pop-up/manage-st
 import { LoginComponent } from './login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SetProfileComponent } from './set-profile/set-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { FormsModule } from '@angular/forms';
     ManageStudentsComponent,
     ManageStudentsPopUpComponent,
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SetProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import { FormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatSelectModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

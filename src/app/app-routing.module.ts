@@ -13,6 +13,7 @@ import { ManageStudentsComponent } from './manage-students/manage-students.compo
 import { LoginComponent } from './login/login.component';
 import { AuthenticationGuardGuard } from './authentication-guard.guard';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SetProfileComponent } from './set-profile/set-profile.component';
 const routes: Routes = [
   { path: "", component: LoginComponent },  
 { path: "course", component: CoursesComponent , canActivate: [AuthenticationGuardGuard]},
@@ -27,7 +28,8 @@ const routes: Routes = [
 {path:"student/peer/review",component:StudentPeerReviewComponent, canActivate: [AuthenticationGuardGuard]},
 {path:"addStudents",component:ManageStudentsComponent, canActivate: [AuthenticationGuardGuard]},
 {path:"signIn",component:LoginComponent},
-{path:"forgotPassword",component:ForgotPasswordComponent}
+{path:"forgotPassword",component:ForgotPasswordComponent},
+{path:"setProfile",component:SetProfileComponent}
 
 ];
 

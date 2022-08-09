@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServicesService, studentCourses} from '../api-services.service'
 import {CommonfunctionsService} from '../commonfunctions.service'
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-student-submission',
   templateUrl: './student-submission.component.html',
@@ -11,6 +12,8 @@ export class StudentSubmissionComponent implements OnInit {
   constructor(private apiService: ApiServicesService,
     public commonfunction:CommonfunctionsService,) { }
   state ;
+  inputFormControl = new FormControl();
+  SubmissionError: Boolean = true;
   Sub= [];
   ngOnInit(): void {
     this.state = history.state;
@@ -33,7 +36,13 @@ public getSubmissions(){
   this.apiService.getSubmission(43,Number(localStorage.getItem("ID")))
   .subscribe((res)=>{
     this.Sub = res;
-    console.log(this.Sub.length);
+   if(this.Sub == undefined){
+    this.inputFormControl = new FormControl({ disabled: true });
+    this.SubmissionError = true;
+   }
+   else {
+    this.SubmissionError = false;
+   }
   })
 }
 }

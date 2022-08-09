@@ -1,11 +1,18 @@
 
+<div>
+<h1>
+  You have been assigned an Assignment that you can download and review.
+  <br />
+  After carefully reviewing the submission, you can answer the questions given below with the best of your ability. 
+</h1>
 <a href="http://192.168.0.6:82//download/files/Assignment43Student2.pdf"> Download Peer Review Assessment</a>
+<br><br>
   <mat-form-field *ngFor="let i of Questions;let j = index" >
+    <br><br>
     <mat-label>{{ i.Question}}</mat-label>
-    <br />
     <textarea #temp matInput placeholder="Enter your answer here" [(ngModel)]="newArray[j]"  ></textarea>
-    <br />
     
   </mat-form-field>
+  <br><br>
   <button (click)="peerReviewSubmission()"> Submit peer review</button>
-  
+</div>
