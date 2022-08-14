@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServicesService, User} from '../api-services.service'
-import {MatSnackBar,  MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import {Router} from "@angular/router"
 import {AuthenticationService} from "../authentication.service"
+import {CommonfunctionsService} from '../commonfunctions.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,20 +11,9 @@ import {AuthenticationService} from "../authentication.service"
 export class LoginComponent implements OnInit {
  
   constructor(private apiService: ApiServicesService,
-    private _snackBar: MatSnackBar,
     private router: Router,
-    private authService : AuthenticationService) { }
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  durationInSeconds = 5;
-  public openSnackBar(message:string) {
-    this._snackBar.open(message, "Dismiss",{
-      duration: this.durationInSeconds * 1000 ,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-
-    });
-  }
+    private authService : AuthenticationService,
+    private commonfunction:CommonfunctionsService,) { }
   loggedIn:User;
   ngOnInit(): void {
   }
@@ -32,7 +21,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(username,password).subscribe((res)=>{
       console.log(res);
       if("message" in res){
-        this.openSnackBar(res["message"]);
+        this.commonfunction.openSnackBar(res["message"]);
         localStorage.setItem('isUserLoggedIn', "false");
         return;
       }

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-
+import {MatSnackBar,  MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root'
 })
 export class CommonfunctionsService {
-
-  constructor() { }
+  durationInSeconds = 5;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  constructor(private _snackBar: MatSnackBar) { }
   public calculateTimeDiff(dateSent){
     let currentDate = new Date();
     dateSent = new Date(dateSent);
@@ -72,6 +74,14 @@ export class CommonfunctionsService {
       return "Updated "+diffDays +" day ago";
     }
    }
+   public openSnackBar(message:string) {
+    this._snackBar.open(message, "Dismiss",{
+      duration: this.durationInSeconds * 1000 ,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+  
+    });
+  }
 }
 
 

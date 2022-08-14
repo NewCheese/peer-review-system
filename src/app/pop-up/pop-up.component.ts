@@ -15,8 +15,9 @@ export interface updateTemplate {
 })
 export class PopUpComponent implements OnInit {
   formData:Array<any>  = [];
+  element ;
   constructor(public dialogRef: MatDialogRef<PopUpComponent>,@Inject(MAT_DIALOG_DATA) public data) {
-   console.log(data);
+   this.element = data;
   }
 
   ngOnInit(): void {
@@ -27,10 +28,11 @@ export class PopUpComponent implements OnInit {
     })
   }
 
-  confirm(name:string,description:string) {
+  confirm(name:string,description:string,format:string) {
     this.dialogRef.close({
       "Name" : name ,
-      "Description" : description
+      "Description" : description,
+      "Format":format
     })
   }
 

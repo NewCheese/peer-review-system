@@ -1,16 +1,33 @@
-
+<div style="margin-top: 15%; margin-left: 35%;margin-right: 35%;border: 1px ; height:300px;align-items: center;">
+    <h1 style="color: blue;">Task Description </h1>
+    <h2>{{this.state.Explaination}}</h2>
+<h1 style="color: blue;"  *ngIf="!disableConidition">You have 1 Submission left for this Assignment </h1>
+<mat-list role="list"  *ngIf="!disableConidition">
+    <mat-list-item role="listitem" style="color:blue">The Submission will start after {{commonfunction.calculateTimeDiff(this.state.SubmissionDate )}}</mat-list-item>
+    <mat-list-item role="listitem" style="color:red">{{commonfunction.calculateTimeDiff(this.state.SubmissionEndDate )}} left for Peer Review Submission</mat-list-item>
+  </mat-list>
 <div class="form-group" >
-    <label for="file">Choose File</label>
+    <label matLabel for="file">Choose File
+        <mat-icon>file_upload</mat-icon>
+    </label>
     <input type="file"
-           id="file"
-           (change)="handleFileInput($event.target.files)" [formControl]="inputFormControl">
+           id="submission"
+           (change)="handleFileInput($event.target.files)"
+           [disabled]='disableConidition'
+           >
 
-    <button (click)="this.uploadFileToActivity()" [formControl]="inputFormControl">
+    <br />  
+   
+    <button  mat-raised-button [disabled]='disableConidition || this.checkerSubmission()' mat-raised-button color="accent" (click)="this.uploadFileToActivity()">
         Submit
     </button>       
 </div>
+<h1 style="color: red;"  *ngIf="disableConidition "> You already have submitted this assignment {{commonfunction.calculateDiff(this.Sub["SubmissionDate"])}} </h1>
 
-<h1 *ngIf="SubmissionError"> You already have submitted this assignment {{commonfunction.calculateDiff(this.Sub["SubmissionDate"]) </h1>
+
+</div>
+
+
    
 
 

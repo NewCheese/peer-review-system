@@ -1,20 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import {ApiServicesService, Course} from '../api-services.service'
-import {MatTableModule} from '@angular/material/table';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
 import {CommonfunctionsService} from '../commonfunctions.service'
 import { MatDialog } from '@angular/material/dialog';
-import { PopUpComponent } from '../pop-up/pop-up.component';
-import {PopUpCourseComponent} from '../pop-up-course/pop-up-course.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSnackBar,  MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import { FormGroup, FormControl } from '@angular/forms';
 import {Router} from "@angular/router"
+
 @Component({
   selector: 'app-assignment-handler',
   templateUrl: './assignment-handler.component.html',
@@ -24,20 +14,24 @@ export class AssignmentHandlerComponent implements OnInit {
   state ;
   Templates;
   formdata;
-  durationInSeconds = 5;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  AssessmentType : string = "Individual";
+  indi:boolean = true;
   constructor(private apiService: ApiServicesService,
     private commonfunction:CommonfunctionsService,
     private dialogRef : MatDialog,
-    private _snackBar: MatSnackBar,
     private router: Router) { }
     defaultSelect ;
     isRouted:boolean= false;
+    today = new Date();
+    groupSize = 0;
   ngOnInit(): void {
+    this.today = new Date();
     this.state = window.history.state;
     console.log("State")
    console.log(this.state)
+   if(this.state.GroupSubmission > 0){
+    this.AssessmentType = "Group"
+   }
    this.getTemplates();
    this.formdata = new FormGroup({ 
     userName: new FormControl("Tutorialspoint")
@@ -45,14 +39,6 @@ export class AssignmentHandlerComponent implements OnInit {
   if("TemplateID" in this.state){
   this.isRouted = true;
   }
-  }
-  public openSnackBar(message:string) {
-    this._snackBar.open(message, "Dismiss",{
-      duration: this.durationInSeconds * 1000 ,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-
-    });
   }
 public getTemplates(){
   this.apiService.viewTemplates()
@@ -72,35 +58,46 @@ public getTemplateByID(template_id){
     
   return null;
 }
-public onClickSubmit(Assignment:string,Explaination:string,Weightage,submission:Date,Review:Date,temp:number){
-  if(Assignment.length == 0){
-    this.openSnackBar("Enter a Unique Valid Assignment Name");
+
+public getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+public onClickSubmit(Assignment:string,Explaination:string,Weightage,submission:Date,Review:Date,temp:number,type,size,submissionEndDate:Date,PeerReviewEndDate:Date){
+  if(this.groupSize <= 2 || this.groupSize > 10){
+    this.commonfunction.openSnackBar("Enter a valid Group Size");
+    return;
+  }
+  else if(Assignment.length == 0){
+    this.commonfunction.openSnackBar("Enter a Unique Valid Assignment Name");
     return;
         }
        else if(Explaination.length == 0){
-          this.openSnackBar("Enter a valid Explaination");
+          this.commonfunction.openSnackBar("Enter a valid Explaination");
           return;
               }
               else if(Weightage==0){
-                this.openSnackBar("Enter a valid Weightage for the assignment");
+                this.commonfunction.openSnackBar("Enter a valid Weightage for the assignment");
                 return;
                     }
                     else if(Explaination.length == 0){
-                      this.openSnackBar("Enter a valid Explaination");
+                      this.commonfunction.openSnackBar("Enter a valid Explaination");
                       return;
                           }
                           else if (!submission){
-                            this.openSnackBar("Enter a valid Submission Date");
+                            this.commonfunction.openSnackBar("Enter a valid Submission Date");
                             return;
                           }
                           else if (!Review){
-                            this.openSnackBar("Enter a valid Review Date");
+                            this.commonfunction.openSnackBar("Enter a valid Review Date");
                             return;
                           }
                           else if(temp === undefined){
                            temp = this.state.TemplateID;
                           }
+                          
                          if(this.isRouted){
+                          console.log("Updated")
+                          console.log(this.isRouted);
                           this.apiService.updateAssignment(
                             this.state.ID ,
                             this.state.CourseID,
@@ -109,26 +106,42 @@ public onClickSubmit(Assignment:string,Explaination:string,Weightage,submission:
                             Explaination ,
                             Weightage  ,
                             submission,
-                             Review
+                             Review,
+                             submissionEndDate,
+                             PeerReviewEndDate
+
                           ).subscribe((res)=>{
                             console.log(res);
-                            this.openSnackBar("Updated Successfully");
+                            this.commonfunction.openSnackBar("Updated Successfully");
                             this.router.navigateByUrl('/assignment', { state: { ID:this.state.CourseID} });
                            })
                          }
                          else {
+                          let id  ;
+                          console.log("Creation")
+                          console.log(this.isRouted);
+                          console.log(this.state.CourseID);
+                          if(this.state.CourseID == undefined){
+                            id = this.state.ID ;
+                          }
+                          else {
+                            id = this.state.CourseID ;
+                          }
+                         
                           this.apiService.postAssignment(
-                            this.state.ID,
+                            this.getRandomInt(100000000),
+                            id,
                             temp,
                            Assignment,
                             Explaination ,
                             Weightage  ,
                             submission,
-                             Review)
+                             Review,
+                             size,submissionEndDate,PeerReviewEndDate)
                           .subscribe((res)=>{
                            console.log(res);
-                           this.openSnackBar("Record Added Successfully, it will reflect in some time");
-                           this.router.navigateByUrl('/assignment', { state: { ID:this.state.ID} });
+                           this.commonfunction.openSnackBar("Record Added Successfully, it will reflect in some time");
+                           this.router.navigateByUrl('/course', { state: { ID:this.state.ID} });
                           })
                         }
 
@@ -136,6 +149,15 @@ public onClickSubmit(Assignment:string,Explaination:string,Weightage,submission:
                         
 
   }
-  
+  public onOptionsSelected(val){
+    console.log(val);
+    if(val==1){
+      this.indi = false;
+    }
+    else {
+      this.indi = true;
+      this.groupSize = 0;
+    }
+  }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServicesService, studentCourses} from '../api-services.service'
 import {CommonfunctionsService} from '../commonfunctions.service'
-import { FormGroup, FormControl } from '@angular/forms';
+import {Router} from "@angular/router"
+
 @Component({
   selector: 'app-student-submission',
   templateUrl: './student-submission.component.html',
@@ -10,9 +11,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class StudentSubmissionComponent implements OnInit {
   fileToUpload: File | null = null;
   constructor(private apiService: ApiServicesService,
-    public commonfunction:CommonfunctionsService,) { }
+    public commonfunction:CommonfunctionsService,
+    private router: Router) { }
   state ;
-  inputFormControl = new FormControl();
+  disableConidition =  false;
   SubmissionError: Boolean = true;
   Sub= [];
   ngOnInit(): void {
@@ -24,25 +26,40 @@ export class StudentSubmissionComponent implements OnInit {
     this.fileToUpload = files.item(0);
 }
 uploadFileToActivity() {
-  // this.apiService.postFile(this.fileToUpload).subscribe(data => {
-    
-  // }
-  this.apiService.postFile(this.fileToUpload,this.state.ID,2)
+  this.apiService.postFile(this.fileToUpload,this.state.AssignmentID,Number(localStorage.getItem("ID")),Number(this.state.GroupSubmission))
   .subscribe((res)=>{
-   console.log(res);
-  })
+   this.commonfunction.openSnackBar("File Submitted Succefully");
+   this.router.navigateByUrl('student/courses');
+  }),(error)=>{
+    this.commonfunction.openSnackBar("Something went wrong,please make sure it is of the right format")
+  }
 }
 public getSubmissions(){
-  this.apiService.getSubmission(43,Number(localStorage.getItem("ID")))
+  this.apiService.getSubmission(this.state["AssignmentID"],Number(localStorage.getItem("ID")))
   .subscribe((res)=>{
     this.Sub = res;
-   if(this.Sub == undefined){
-    this.inputFormControl = new FormControl({ disabled: true });
-    this.SubmissionError = true;
+    console.log(res);
+    console.log("FileName" in this.Sub);
+   if("FileName" in this.Sub){
+    this.disableConidition =  true;
    }
    else {
-    this.SubmissionError = false;
+    this.disableConidition =  false;
    }
   })
+}
+public checkerSubmission(){
+
+  var date1 = this.state.SubmissionDate;
+  let Date1 = new Date(date1);
+
+  var date2 = this.state.SubmissionEndDate;
+  let Date2 = new Date(date2);
+
+  var date3 = new Date();
+  if(date3.getTime() >= Date1.getTime() && date3.getTime() <= Date2.getTime()){
+    return false;
+  }
+  return true;
 }
 }

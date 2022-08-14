@@ -1,18 +1,26 @@
 
-<div>
-<h1>
+<div style="margin-top: 5%; margin-left: 35%;margin-right: 35%;border: 1px ; height:300px;align-items: center;">
+  <h1 style="color: blue;">Task Description </h1>
+  <h2>{{this.state.Explaination}}</h2>
+  <h1 style="color: blue;" *ngIf="!disableConidition">
   You have been assigned an Assignment that you can download and review.
   <br />
   After carefully reviewing the submission, you can answer the questions given below with the best of your ability. 
 </h1>
-<a href="http://192.168.0.6:82//download/files/Assignment43Student2.pdf"> Download Peer Review Assessment</a>
-<br><br>
-  <mat-form-field *ngFor="let i of Questions;let j = index" >
-    <br><br>
-    <mat-label>{{ i.Question}}</mat-label>
-    <textarea #temp matInput placeholder="Enter your answer here" [(ngModel)]="newArray[j]"  ></textarea>
-    
-  </mat-form-field>
-  <br><br>
-  <button (click)="peerReviewSubmission()"> Submit peer review</button>
+<mat-list role="list"  *ngIf="!disableConidition">
+  <mat-list-item role="listitem" style="color:blue">The Peer Review Submission will start after {{commonfunction.calculateTimeDiff(this.state.PeerReviewDate )}}</mat-list-item>
+  <mat-list-item role="listitem" style="color:red">{{commonfunction.calculateTimeDiff(this.state.PeerReviewEndDate )}} left for Peer Review Submission</mat-list-item>
+</mat-list>
+<h1 style="color: red;"  *ngIf="disableConidition"> You already have Reviewed it at {{commonfunction.calculateDiff(this.previousSubmission)}} </h1>
+
+<!-- http://192.168.0.6:82//download/files/Assignment43Student2.pdf -->
+<a [href]="this.url"> Download Peer Review Assessment</a>
+<br>
+  <div *ngFor="let i of Questions;let j = index" >
+    <br>
+    <h3>{{ i.Question}}</h3>
+    <input [type]="isText ? 'text' : 'number'" placeholder="Enter your answer here" [(ngModel)]="newArray[j]" >
+  </div>
+  <br>
+  <button mat-raised-button [disabled]='disableConidition || this.checkerPeer()'(click)="peerReviewSubmission()"> Submit peer review</button>
 </div>

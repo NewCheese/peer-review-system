@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatDialogRef} from '@angular/material/dialog';
-import { EventEmitter } from '@angular/core';
 
 
 @Component({

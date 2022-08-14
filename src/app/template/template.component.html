@@ -14,6 +14,10 @@
       <th mat-header-cell *matHeaderCellDef> Description </th>
       <td mat-cell *matCellDef="let element"> {{element.Description }} </td>
     </ng-container>
+    <ng-container matColumnDef="TemplateType">
+      <th mat-header-cell *matHeaderCellDef> TemplateType </th>
+      <td mat-cell *matCellDef="let element"> {{this.setTemplate(element.TemplateType) }} </td>
+    </ng-container>
     <ng-container matColumnDef="CreationDate">
       <th mat-header-cell *matHeaderCellDef> Last Updated </th>
       <td mat-cell *matCellDef="let element"> {{commonfunctions.calculateDiff(element.CreationDate )}}</td>

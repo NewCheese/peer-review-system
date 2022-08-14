@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServicesService,Template} from '../api-services.service'
-import {MatTableModule} from '@angular/material/table';
 import {MatTableDataSource} from "@angular/material/table";
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import {NewTemplatePopUpComponent} from '../new-template-pop-up/new-template-pop-up.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSnackBar,  MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import {CommonfunctionsService} from '../commonfunctions.service'
@@ -16,36 +13,32 @@ import {CommonfunctionsService} from '../commonfunctions.service'
   styleUrls: ['./template.component.css']
 })
 export class TemplateComponent implements OnInit {
-  displayedColumns: string[] = ['ID', 'Name','Description','CreationDate','edit','del'];
+  displayedColumns: string[] = ['ID', 'Name','Description','TemplateType','CreationDate','edit','del'];
   public dataSource = new MatTableDataSource<Template>();
   closeModal: string;
-  durationInSeconds = 5;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
 
     constructor(private apiService: ApiServicesService,private dialogRef : MatDialog,
-      private _snackBar: MatSnackBar,
       @Inject(DOCUMENT) private domDocument: Document,
-      private commonfunctions:CommonfunctionsService ) { 
+      private commonfunction:CommonfunctionsService ) { 
   
     }
     ngOnInit(): void {
      this.viewResults();
     }
-    public openSnackBar(message:string) {
-      this._snackBar.open(message, "Dismiss",{
-        duration: this.durationInSeconds * 1000 ,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-
-      });
-    }
   public  viewResults() : any{
     this.apiService.viewTemplates()
     .subscribe((res)=>{
+      console.log(res);
       this.dataSource.data = res;
     })
   
+  }
+  public setTemplate(val){
+    if(val=="0"){
+      return "Formative";
+    }
+    return "Summative";
   }
    public editTemplate(element:Template){
   
@@ -58,14 +51,15 @@ export class TemplateComponent implements OnInit {
        
         let name = response["Name"];
         let description = response["Description"];
-        this.apiService.putTemplate(name,description,element.ID).subscribe((res)=>{
+        let format = response["Format"];
+        this.apiService.putTemplate(name,description,format,element.ID).subscribe((res)=>{
   
           if("message" in res){
-            this.openSnackBar(res["message"]);
+            this.commonfunction.openSnackBar(res["message"]);
             return;
           }
           
-        this.openSnackBar("Record updated successfully");
+        this.commonfunction.openSnackBar("Record updated successfully");
             this.ngOnInit();
       
         });
@@ -79,7 +73,7 @@ export class TemplateComponent implements OnInit {
     let ans  = confirm("Are you sure you want to delete "+element.Name);
     if(ans){
       this.apiService.deleteTemplate(element.ID).subscribe((res)=>{
-        this.openSnackBar("Record deleted successfully");
+        this.commonfunction.openSnackBar("Record deleted successfully");
             this.ngOnInit();
 
       });
@@ -96,12 +90,14 @@ export class TemplateComponent implements OnInit {
     .subscribe(response => {
       let name = response["Name"];
         let description = response["Description"];
-        this.apiService.postTemplate(name,description).subscribe((res)=>{
+        let format = response["Format"]
+        this.apiService.postTemplate(name,description,format).subscribe((res)=>{
           if("message" in res){
-            this.openSnackBar(res["message"]);
+            this.commonfunction.openSnackBar(res["message"]);
             return;
           }
-          this.openSnackBar("Record added successfully");
+          console.log(res);
+          this.commonfunction.openSnackBar("Record added successfully");
            this.ngOnInit(); 
         });
 

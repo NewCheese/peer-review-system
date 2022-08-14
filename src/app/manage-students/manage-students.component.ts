@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiServicesService,studentCourses} from '../api-services.service'
-import {MatTableModule} from '@angular/material/table';
 import {MatTableDataSource} from "@angular/material/table";
 import { MatDialog } from '@angular/material/dialog';
-import { PopUpComponent } from '../pop-up/pop-up.component';
 import {ManageStudentsPopUpComponent} from '../manage-students-pop-up/manage-students-pop-up.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSnackBar,  MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import {CommonfunctionsService} from '../commonfunctions.service'
@@ -20,14 +16,10 @@ export class ManageStudentsComponent implements OnInit {
   displayedColumns: string[] = ['StudentID', 'StudentName','Status'];
   public dataSource = new MatTableDataSource<studentCourses>();
   closeModal: string;
-  durationInSeconds = 5;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   state ;
     constructor(private apiService: ApiServicesService,private dialogRef : MatDialog,
-      private _snackBar: MatSnackBar,
       @Inject(DOCUMENT) private domDocument: Document,
-      private commonfunctions:CommonfunctionsService ) { 
+      private commonfunction:CommonfunctionsService ) { 
   
     }
     allStudents;
@@ -45,14 +37,7 @@ export class ManageStudentsComponent implements OnInit {
       this.allStudents = res;
     })
     }
-    public openSnackBar(message:string) {
-      this._snackBar.open(message, "Dismiss",{
-        duration: this.durationInSeconds * 1000 ,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
 
-      });
-    }
   public  viewResults() : any{
     this.apiService.enrolledStudents(this.state.ID)
     .subscribe((res)=>{
@@ -71,12 +56,12 @@ export class ManageStudentsComponent implements OnInit {
       let StudentID = response["StudentID"];
         this.apiService.manageStudents(StudentID,this.state.ID).subscribe((res)=>{
           if("message" in res){
-            this.openSnackBar(res["message"]);
+            this.commonfunction.openSnackBar(res["message"]);
             return;
           }
           console.log("res");
           console.log(res);
-          this.openSnackBar("Record added successfully");
+          this.commonfunction.openSnackBar("Record added successfully");
            this.ngOnInit(); 
         });
 
@@ -142,7 +127,7 @@ return("Pending");
               let ans =  csvRecordsArray[row].split(",");
               console.log(ans);
               if(ans.length >1){
-                this.openSnackBar("Invalid CSV Format");
+                this.commonfunction.openSnackBar("Invalid CSV Format");
               }
               i = 1;
               continue;
@@ -153,10 +138,10 @@ return("Pending");
             }
             this.apiService.manageStudents(result,this.state.ID).subscribe((res)=>{
               if("message" in res){
-                this.openSnackBar(res["message"]);
+                this.commonfunction.openSnackBar(res["message"]);
                 return;
               }
-              this.openSnackBar("Record added successfully");
+              this.commonfunction.openSnackBar("Record added successfully");
                this.ngOnInit(); 
             });
     

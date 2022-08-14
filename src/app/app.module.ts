@@ -44,6 +44,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SetProfileComponent } from './set-profile/set-profile.component';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +94,8 @@ import { SetProfileComponent } from './set-profile/set-profile.component';
     MatSelectModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFileUploadModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

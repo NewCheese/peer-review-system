@@ -1,48 +1,85 @@
 
-
-<h2>
-  Create/Update the Assignment
-</h2>
-<div class="example-form" style="margin-left: 40%; margin-top: 10%; border: 1px;">  
-   
-      <mat-form-field class="example-full-width" appearance="fill">
+<div class="example-form" style="margin-left: 20%; margin-top: 10%;width:50%;margin-right: 20%; border: 1px;">  
+ 
+    <h3 class="card-header">Create/Update an Assignment</h3>
+    <div class="card-body">
+      <mat-form-field  style="margin-right: 3%;"class="example-full-width" appearance="fill">
         <mat-label>Assignment Name</mat-label>
         <input #Assignment matInput value="{{this.state.TaskName}}">
       </mat-form-field>
-      <br />
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label> Explaination</mat-label>
-        <input #Explaination matInput value="{{this.state.Explaination}}">
+     
+      <mat-form-field style="margin-right: 3%; width: 100%;" class="example-full-width" appearance="fill">
+        <mat-label> Describe the Assignment in detail</mat-label>
+       
+        <textarea  #Explaination matInput placeholder="Comment" value="{{this.state.Explaination}}"></textarea>
       </mat-form-field>
-      <br />
-      <mat-form-field class="example-full-width" appearance="fill">
+     
+      
+      <mat-form-field class="example-full-width" appearance="fill" style="margin-right: 2%; width:30%">
         <mat-label> Weightage</mat-label>
         <input #Weightage matInput type="number" min="1" max="80" value="{{this.state.Weightage}}">
       </mat-form-field>
-      <br />
-      <mat-form-field appearance="fill">
-        <mat-label>Submission Date</mat-label>
-        <input #submission matInput [matDatepicker]="picker1" [value]="this.state.SubmissionDate">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-      <br />
-      <mat-form-field appearance="fill">
-        <mat-label>Peer Review Date</mat-label>
-        <input #Review matInput [matDatepicker]="picker2" [value]="this.state.PeerReviewDate" >
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
-      <br />
-      <mat-form-field appearance="fill">
+
+      <mat-form-field appearance="fill" style="margin-right: 2%; width:30%">
         <mat-label>{{this.getTemplateByID(this.state.TemplateID)}}</mat-label>
         <mat-select  #temp>
           <mat-option *ngFor="let item of Templates let i = index" [value]="Templates[i].ID" >{{Templates[i].Name}}</mat-option>
           
         </mat-select>
+        
+      </mat-form-field>
+     <br />
+      <mat-form-field appearance="fill" style="margin-right: 2%; width:30%">
+        <mat-label>Submission Start Date</mat-label>
+        <input #submission matInput [matDatepicker]="picker1" [value]="this.state.SubmissionDate" [min]="today" >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="margin-right: 2%; width:30%">
+        <mat-label>Submission End Date</mat-label>
+        <input #submissionEnd matInput [matDatepicker]="picker2"
+         [value]="this.state.SubmissionEndDate" 
+         [min]="today" >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
       <br />
-      <button (click)="onClickSubmit(Assignment.value,Explaination.value,Weightage.value,submission.value,Review.value,temp.value)" mat-flat-button color="accent">Save</button>
+      <mat-form-field appearance="fill" style="margin-right: 2%; width:30%">
+        <mat-label>Peer Review Start Date</mat-label>
+        <input #Review matInput [matDatepicker]="picker3" [value]="this.state.PeerReviewDate" [min]="today" >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3 ></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="margin-right: 2%; width:30%">
+        <mat-label>Peer Review End Date</mat-label>
+        <input #ReviewEnd matInput [matDatepicker]="picker4" [value]="this.state.PeerReviewEndDate" [min]="today" >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+        <mat-datepicker #picker4 ></mat-datepicker>
+      </mat-form-field>
+     
+      <br />
+      <mat-form-field appearance="fill" style="margin-top:2%;margin-right:2%">
+        <mat-label>{{this.AssessmentType}}</mat-label>
+        <mat-select  #type [disabled]="this.isRouted" (valueChange)='onOptionsSelected(type.value)'>
+          <mat-option value="0">Individual</mat-option>
+          <mat-option value="1">Group</mat-option>
+        </mat-select>
+        
+      </mat-form-field>
+     
+
+      <mat-form-field  class="example-full-width" appearance="fill">
+        <mat-label> Group Size</mat-label>
+        <input #groupsize matInput type="number" min=2 max=4 [value]="this.state.GroupSize" [disabled]="this.isRouted || indi" [(ngModel)]="groupSize">
+      </mat-form-field>
+      <br />
+      
+      <button (click)="onClickSubmit(Assignment.value,Explaination.value,Weightage.value,submission.value,Review.value,temp.value,type.value,groupsize.value,submissionEnd.value,ReviewEnd.value)" mat-flat-button color="accent">Save</button>
+</div>
 </div>

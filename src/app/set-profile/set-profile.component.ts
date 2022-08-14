@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiServicesService, Assignment} from '../api-services.service'
-import {MatTableModule} from '@angular/material/table';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
+import {ApiServicesService} from '../api-services.service'
 import {CommonfunctionsService} from '../commonfunctions.service'
 import { MatDialog } from '@angular/material/dialog';
-import { PopUpComponent } from '../pop-up/pop-up.component';
-import {PopUpCourseComponent} from '../pop-up-course/pop-up-course.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSnackBar,  MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
-import { Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import {EditCoursePopUpComponent} from '../edit-course-pop-up/edit-course-pop-up.component'
 import {  Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 export const enum PasswordCheckStrength {
@@ -31,14 +20,10 @@ export const enum PasswordCheckStrength {
 export class SetProfileComponent implements OnInit {
   public id: string;
     closeModal: string;
-    durationInSeconds = 5;
-    horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-    verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
     constructor(private apiService: ApiServicesService,
       private commonfunction:CommonfunctionsService,
       private dialogRef : MatDialog,
-      private _snackBar: MatSnackBar,
       private router: Router,
       private route: ActivatedRoute) { 
         
@@ -90,43 +75,36 @@ export class SetProfileComponent implements OnInit {
   });
   }
 
-  public openSnackBar(message:string) {
-    this._snackBar.open(message, "Dismiss",{
-      duration: this.durationInSeconds * 1000 ,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
 
-    });
-  }
   public onClickSubmit(p,rp,f,l){
     console.log("called");
    var res = this.checkPasswordStrength(p);
    if(res == 0){
-    this.openSnackBar("Password is Short");
+    this.commonfunction.openSnackBar("Password is Short");
     return;
    }
    else if(res == 1){
-    this.openSnackBar("Password is Common");
+    this.commonfunction.openSnackBar("Password is Common");
     return;
    }
    else if(res == 2){
-    this.openSnackBar("Password is Weak");
+    this.commonfunction.openSnackBar("Password is Weak");
     return
   }
   if(p != rp){
-    this.openSnackBar("Password does not match, try again");
+    this.commonfunction.openSnackBar("Password does not match, try again");
     return
   }
   if(!f){
-    this.openSnackBar("Enter First Name");
+    this.commonfunction.openSnackBar("Enter First Name");
     return;
   }
   if(!l){
-    this.openSnackBar("Enter Last Name");
+    this.commonfunction.openSnackBar("Enter Last Name");
     return;
   }
     this.apiService.putStudent(Number(this.id),p,f,l).subscribe((res)=>{
-    this.openSnackBar("Record Added successfully");
+    this.commonfunction.openSnackBar("Record Added successfully");
     this.router.navigateByUrl("/signIn");
   });
    

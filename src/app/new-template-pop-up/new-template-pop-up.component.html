@@ -5,7 +5,15 @@
 <input type="text" #description>
 <br />
 <br />
-<button class="btn btn-primary" id="yes" (click)="confirm(name.value,description.value)">
+<select  #format>
+  <option value="0">Formative (Not Graded)</option>
+  <option value="1">Summative (Graded)</option>
+  </select>
+ <br /> 
+ <br />
+    
+    
+<button class="btn btn-primary" id="yes" (click)="confirm(name.value,description.value,format.value)">
     Save
 </button>
 

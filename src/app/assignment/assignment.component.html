@@ -3,25 +3,6 @@
     }">
 Add Assignment
 </button>
-<!-- <mat-grid-list  cols="2" rowHeight="2:1" >
-    <mat-grid-tile *ngFor="let ass of allAssignments"  >
-     <mat-card>
-       
-      <mat-card-header>
-          <mat-card-title>{{ass.TaskName}}</mat-card-title>
-          <mat-card-subtitle>{{commonfunction.calculateDiff(ass.SubmissionDate )}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content><p> {{ass.Explaination}} </p></mat-card-content>
-      <mat-card-content><p> Weightage:- {{ass.Weightage}} percent</p></mat-card-content>
-    
-        <i class="material-icons" routerLink="/create/assignment" [state]="ass" >edit</i>
-        <i class="material-icons" (click)="deleteAssignment(ass)">delete</i>
-        <mat-card-footer>  
-    </mat-card-footer>
-      
-     </mat-card>
-    </mat-grid-tile>
-</mat-grid-list> -->
 
 <mat-divider vertical style="height:30px"></mat-divider>
 
@@ -41,7 +22,7 @@ Add Assignment
 
   <button mat-raised-button color="accent" style="margin: 1%;">
     <i class="material-icons" routerLink="/create/assignment" [state]="ass" >edit</i> Edit
-</button>
+  </button>
   <br />
   <button mat-raised-button color="accent" (click)="deleteAssignment(ass)" style="margin: 1%;">Delete</button>
   <button mat-raised-button color="accent" (click)="downloadResults(ass)" style="margin: 1%;">Download Responses</button>
