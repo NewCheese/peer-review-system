@@ -20,12 +20,12 @@
   </mat-card-subtitle>
 
 </mat-card-header>
-<button mat-raised-button color="accent" style="left:4%;" routerLink="/student/submission" [state]="ass" [disabled]="this.checkerSubmission(ass)">
+<button mat-raised-button color="accent" style="left:4%;" routerLink="/student/submission" [state]="ass">
   <mat-icon>assignment</mat-icon>
     Submit
 </button>
 
-<button mat-raised-button color="accent" style="left:5%;" [disabled]="this.checkerPeer(ass)" routerLink="/student/peer/review" [state]="ass">
+<button mat-raised-button color="accent" style="left:5%;"  routerLink="/student/peer/review" [state]="ass">
   <mat-icon>work</mat-icon>
     Peer Review
 </button>
