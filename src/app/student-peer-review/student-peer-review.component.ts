@@ -97,7 +97,7 @@ export class StudentPeerReviewComponent implements OnInit {
     })
   }
   public checkerPeer(){
-   
+   return false;
     var date1 = this.state.PeerReviewDate;
     let Date1 = new Date(date1);
 
