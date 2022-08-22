@@ -20,7 +20,7 @@
     </ng-container>
     <ng-container matColumnDef="CreationDate">
       <th mat-header-cell *matHeaderCellDef> Last Updated </th>
-      <td mat-cell *matCellDef="let element"> {{commonfunctions.calculateDiff(element.CreationDate )}}</td>
+      <td mat-cell *matCellDef="let element"> {{this.commonfunction.calculateDiff(element.CreationDate )}}</td>
     </ng-container>
 
     <ng-container matColumnDef="edit">

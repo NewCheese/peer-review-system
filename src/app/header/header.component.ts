@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import { DarkModeService } from 'angular-dark-mode';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,8 +11,10 @@ export class HeaderComponent implements OnInit {
 
   messages: any;
   public userType:string="";
+  darkMode$ = this.darkModeService.darkMode$;
   constructor(  private authService: AuthenticationService,
-    private router: Router) { 
+    private router: Router,
+    private darkModeService: DarkModeService) { 
       this.setHeaders();
     }
 
@@ -30,6 +33,9 @@ export class HeaderComponent implements OnInit {
      console.log(this.userType);
   });
   }
-  
+  onToggle(): void {
+    this.darkModeService.toggle();
+    console.log("clicked");
+  }
 
 }

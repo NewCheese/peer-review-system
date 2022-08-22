@@ -29,6 +29,7 @@
     "@angular/router": "^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.11.5",
+    "angular-dark-mode": "^3.0.2",
     "angular-material-fileupload": "^3.0.2",
     "file-saver": "^2.0.5",
     "i": "^0.3.7",

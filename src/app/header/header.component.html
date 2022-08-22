@@ -11,7 +11,14 @@
         <a mat-button *ngIf="this.userType == 'Student'" [routerLink]="'/student/courses'"> Enrolled Modules </a>
         <a mat-button (click)="logout()"> Log out </a>
       </div>
-      
+      <input
+  id="darkMode"
+  type="checkbox"
+  [checked]="darkMode$ | async"
+  (change)="this.onToggle()"
+  class="toggle"
+/>
+
     </mat-toolbar-row>
   </mat-toolbar>
 

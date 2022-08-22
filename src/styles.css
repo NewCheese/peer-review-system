@@ -9,7 +9,15 @@
 /* Auth */
 
 
+body.dark-mode {
+  background-color: #2d3436;
+  color: #dfe6e9;
+}
 
+body.light-mode {
+  background-color: #dfe6e9;
+  color: #2d3436;
+}
 .full-page-wrapper {
     min-height: 100vh;
     padding-left: 0;

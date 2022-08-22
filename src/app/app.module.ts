@@ -45,7 +45,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SetProfileComponent } from './set-profile/set-profile.component';
 import { MatFileUploadModule } from 'angular-material-fileupload';
-
+import { DarkModeService } from 'angular-dark-mode';
 @NgModule({
   declarations: [
     AppComponent,
