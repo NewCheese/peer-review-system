@@ -63,7 +63,7 @@ public getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 public onClickSubmit(Assignment:string,Explaination:string,Weightage,submission:Date,Review:Date,temp:number,type,size,submissionEndDate:Date,PeerReviewEndDate:Date){
-  if(this.groupSize <= 2 || this.groupSize > 10){
+  if(this.groupSize > 6){
     this.commonfunction.openSnackBar("Enter a valid Group Size");
     return;
   }

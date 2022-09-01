@@ -9,7 +9,9 @@ import { DarkModeService } from 'angular-dark-mode';
 })
 export class HeaderComponent implements OnInit {
 
+  userID ;
   messages: any;
+  showFiller = false;
   public userType:string="";
   darkMode$ = this.darkModeService.darkMode$;
   constructor(  private authService: AuthenticationService,
@@ -21,6 +23,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.setHeaders();
     this.userType = localStorage.getItem("userType");
+    this.userID = localStorage.getItem("EmailAddress")
   }
   logout(): void {
     this.authService.logout();
@@ -35,7 +38,8 @@ export class HeaderComponent implements OnInit {
   }
   onToggle(): void {
     this.darkModeService.toggle();
-    console.log("clicked");
   }
-
+  sideNavBar(event){
+    console.log(event);
+  }
 }

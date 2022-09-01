@@ -1,12 +1,24 @@
-<div class="example-card">
-  <h1 class="md-display-3">Dashboard</h1>
-  <h2 class="md-display-3">This Page consists of all the pending Assignments. <br >
-    For each of the assignment, you can submit or peer review before the deadline.
-  </h2>
-</div>
-<mat-divider vertical style="height:30px"></mat-divider>
 
-<mat-card class="example-card" *ngFor="let ass of this.allAssignments">
+<mat-card class="example-card" style="margin-top: 3%;">
+  <mat-card-header>
+    <mat-card-title>Assignments </mat-card-title>
+    <mat-card-subtitle>
+      for {{this.state.Name}}
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      <h3>
+        This Page consists of all the pending Assignments. <br >
+        For each of the assignment, you can submit or peer review before the deadline.
+      </h3>
+    </mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-content>
+  </mat-card-content>
+  </mat-card>
+<mat-divider vertical style="height:30px"></mat-divider>
+<div *ngFor="let ass of this.allAssignments">
+<mat-card class="example-card" >
 <mat-card-header>
   <div mat-card-avatar class="example-header-image"></div>
   <mat-card-title>Assignment Name : {{ass.TaskName}}</mat-card-title>
@@ -30,7 +42,17 @@
     Peer Review
 </button>
 
-<mat-card-content>
-  
-</mat-card-content>
+<button mat-raised-button color="accent" style="margin-left:6%;"  (click)="getPeerReviews(ass)">
+  <mat-icon>work</mat-icon>
+   View Peer Reviews
+</button> 
+<br />
+<br />
+<button mat-raised-button color="accent" style="margin-left:4%;" (click)="rating(ass)">
+  <mat-icon>work</mat-icon>
+  Rate Peer Review
+</button> 
 </mat-card>
+<mat-divider vertical style="height:30px"></mat-divider>
+</div>
+

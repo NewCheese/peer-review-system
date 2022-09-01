@@ -1,11 +1,13 @@
-<div class="login-wrapper">
-  <h2>
-   
-    </h2>
+<div class="login-wrapper" style="text-align: center;">
+  <form (keyenter)="login(username.value,password.value)">
+
+
     <mat-card class="box">
-      <mat-card-header>
-        <mat-card-title style="text-align: center;"> Peer Code Review System
-          Log In</mat-card-title>
+      <mat-card-header style="align-items: center; margin-left: 7%;">
+  <h2>
+    <i>Code Peer Review System</i>
+  </h2>
+
       </mat-card-header>
 
       <div style="text-align: center;">
@@ -13,18 +15,29 @@
       </div> 
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput  required  #username placeholder="Username">
+            <input matInput  required  #username placeholder="Student ID">
           </mat-form-field>
           <br />
           <mat-form-field class="example-full-width">
             <input matInput required type="password" #password placeholder="Password">
           </mat-form-field>
+          <div class="form-group col text-left" (click)="handlePasswordForgot()" style="margin-left: 14%;">
+            <a routerLink="../forgot-password" class="btn btn-link pr-0"><h5>Forgot Password?</h5></a>
+          </div>
         </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block" (click)="login(username.value,password.value)">Log in</button>
-        <button mat-stroked-button color="accent" class="btn-block" (click)="handlePasswordForgot()">Forgot Password</button>
+        
+        <button mat-stroked-button color="accent"  class="btn-block" (click)="login(username.value,password.value)" style="width:60%;">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Log in</button>
+       
     </mat-card>
+  </form>
   </div>
 
 
 
   
+
+
+
+ 

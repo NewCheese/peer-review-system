@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatDialogRef} from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-new-template-pop-up',
   templateUrl: './new-template-pop-up.component.html',

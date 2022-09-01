@@ -1,11 +1,21 @@
 
-<button mat-stroked-button (click)="openPopUp()" >Add Question</button>
+<mat-divider vertical style="height:30px"></mat-divider>
+<mat-card class="example-card" style="width: 88%;left: 3%;">
+  <h2>
+    Questionare for {{this.state.Name}}
+  </h2>
+    <h4>
+      This page displays all the Questions.  <br>
+      It provides a structure for the peer review assessment. <br>
+      Existing questions or new questions can be created by clicking on the template name.
+    </h4>
+  <button mat-stroked-button (click)="openPopUp()" >Add Question</button>
+</mat-card>
+<mat-divider vertical style="height:30px"></mat-divider>
+
 <!-- <i class="material-icons" (click)="openPopUp()">add</i> -->
+<div style="margin-left: 3%;">
 <table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="ID">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
-    </ng-container>  
     <ng-container matColumnDef="Question">
       <th mat-header-cell *matHeaderCellDef> Question </th>
       <td mat-cell *matCellDef="let element"> {{element.Question }} </td>
@@ -32,6 +42,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
+</div>
 
   

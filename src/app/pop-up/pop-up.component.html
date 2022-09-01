@@ -3,14 +3,15 @@
 <input type="text" #name><br>
 <label for="lname">Description </label><br>
 <input type="text" #description >
+<br /> 
 <br />
 <select  #format>
     <option value="0">Formative (Not Graded)</option>
     <option value="1">Summative (Graded)</option>
     </select>
-   <br /> 
-<br />
-<button class="btn btn-primary" id="yes" (click)="confirm(name.value,description.value,format.value)">
+    <br /> 
+    <br />
+<button class="btn btn-primary" id="yes" (click)="confirm(name.value,description.value,format.value)" style="margin-right:3%">
     Save
 </button>
 

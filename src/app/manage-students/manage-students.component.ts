@@ -6,6 +6,7 @@ import {ManageStudentsPopUpComponent} from '../manage-students-pop-up/manage-stu
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import {CommonfunctionsService} from '../commonfunctions.service'
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-manage-students',
@@ -45,7 +46,18 @@ export class ManageStudentsComponent implements OnInit {
     })
   
   }
-   
+
+  public downloadFile(data: any) {
+    const replacer = (key, value) => value === null ? '' : value; // specify how you want to handle null values here
+    const header = Object.keys(data[0]);
+    let csv = data.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+    csv.unshift(header.join(','));
+    let csvArray = csv.join('\r\n');
+  
+    var blob = new Blob([csvArray], {type: 'text/csv' })
+    saveAs(blob, "Template"+".csv");
+  }
+
   public openPopUp(){
     this.dialogRef.open(ManageStudentsPopUpComponent,{
       data : {
@@ -66,6 +78,14 @@ export class ManageStudentsComponent implements OnInit {
         });
 
     });;
+    
+  }
+  public downloadTemplate(){
+    var answer = {};
+    answer["StudentID"] = null;
+    var temp = [];
+    temp.push(answer);
+    this.downloadFile(temp)
     
   }
   public setStudentName(ID:number){

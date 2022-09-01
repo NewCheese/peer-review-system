@@ -10,6 +10,8 @@ import {CommonfunctionsService} from '../commonfunctions.service'
 })
 export class LoginComponent implements OnInit {
  
+  loading = false;
+  submitted = false;
   constructor(private apiService: ApiServicesService,
     private router: Router,
     private authService : AuthenticationService,
@@ -18,11 +20,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   public login(username,password){
+    this.loading = true;
     this.authService.login(username,password).subscribe((res)=>{
       console.log(res);
       if("message" in res){
         this.commonfunction.openSnackBar(res["message"]);
         localStorage.setItem('isUserLoggedIn', "false");
+        this.loading = false;
         return;
       }
       this.loggedIn = res;

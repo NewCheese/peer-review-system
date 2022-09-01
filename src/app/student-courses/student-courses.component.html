@@ -1,18 +1,29 @@
 
-<div class="example-card">
-    <h1 class="md-display-3">Dashboard</h1>
-    <h2 class="md-display-3">This Page consists of all the enrolled modules. <br >
-    Click on View Assignments for viewing and submitting Assignments and its respective peer review before the deadline.
-    </h2>
-</div>
+<mat-card class="example-card" style="margin-top: 3%;">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Enrolled Modules</mat-card-title>
+    <mat-card-subtitle>
+      <h3>
+       This page consists all the enrolled modules <br >
+      </h3>
+    </mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-content>
+  </mat-card-content>
+  </mat-card>
 <mat-divider vertical style="height:30px"></mat-divider>
-<mat-card class="example-card" *ngFor="let card of this.enrolledCourses">
+<div *ngFor="let card of this.enrolledCourses">
+
+<mat-card class="example-card" >
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>Module : {{setCourseName(card.CourseID)}}</mat-card-title>
     <mat-card-subtitle>
         <a routerLink="/student/assignment"[state]="{
-            'CourseID':card.CourseID
+            'CourseID':card.CourseID ,
+            'Name':setCourseName(card.CourseID)
             }" >View Assignments</a>
     </mat-card-subtitle>
     <mat-card-subtitle>
@@ -29,4 +40,5 @@
     <i class="material-icons">assessment</i>
   </mat-card-actions>
 </mat-card>
-
+<mat-divider vertical style="height:30px"></mat-divider>
+</div>

@@ -107,6 +107,9 @@ public getSubmissions(assignmentId,student_id):Observable<any[]> {
 public getResults(assignmentId):Observable<any[]> {
   return this.http.get<any[]>(environment.apiUrl+'/get/results/'+assignmentId)
 }
+public getPeerReview(assignmentId,Student_id):Observable<any[]> {
+  return this.http.get<any[]>(environment.apiUrl+'/get/reviews/'+assignmentId+'/'+Student_id)
+}
 public getPeerReviewSubmissions(assignmentId,Student_id):Observable<any[]> {
   return this.http.get<any[]>(environment.apiUrl+'/get/results/'+assignmentId+'/'+Student_id)
 }
@@ -146,6 +149,12 @@ public getQuestionare(assignmentId):Observable<any[]> {
       "Name":name ,
       "Description":description,
       "Format":format
+    })
+  }
+  public putStars(stars,AssignmentID,StudentID):Observable<UpdateTemplate>{
+    return this.http.put<UpdateTemplate>(environment.apiUrl+'/put/stars/'+StudentID,{
+      "Stars":stars ,
+      "AssignmentID":AssignmentID
     })
   }
   public putCourse(CourseName:string,Credits:string,Id:number):Observable<UpdateTemplate>{

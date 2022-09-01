@@ -15,7 +15,7 @@ import {SecondPopUpQuestionareComponent} from '../second-pop-up-questionare/seco
 })
 export class QuestionareComponent implements OnInit {
  
-  displayedColumns: string[] = ['ID', 'Question','Sequence','CreationDate','edit','del'];
+  displayedColumns: string[] = ['Question','Sequence','CreationDate','edit','del'];
   public dataSource = new MatTableDataSource<Question>();
   closeModal: string;
 
@@ -30,8 +30,8 @@ export class QuestionareComponent implements OnInit {
     
     ngOnInit(): void {
       this.state = history.state;
+      console.log(this.state);
      this.viewResults(this.state.ID);
-
     }
   public  viewResults(Id) : any{
     this.apiService.viewQuestionare(Id)

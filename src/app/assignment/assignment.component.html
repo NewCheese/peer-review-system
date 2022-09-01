@@ -1,13 +1,26 @@
-<button mat-stroked-button routerLink="/create/assignment" [state]="{
-    'CourseID':this.state.ID
-    }">
-Add Assignment
-</button>
+
 
 <mat-divider vertical style="height:30px"></mat-divider>
+<mat-card class="example-card" style="margin-left: 3%; width:88%;">
+  
+    <h2>
+      Assignments for {{this.state.CourseName}}
+    </h2>
+    <h4>
+      This page displays all the Assignments.  <br>
+      It can be used to download responses, edit or delete assignment.
+    </h4>
+    <button mat-stroked-button routerLink="/create/assignment" [state]="{
+      'CourseID':this.state.ID
+      }">
+  Add Assignment
+  </button>
+</mat-card> 
+<mat-divider vertical style="height:30px"></mat-divider>
+<div  *ngFor="let ass of allAssignments" style="margin-left: 3%; width:88%;">
 
 
-<mat-card class="example-card" *ngFor="let ass of allAssignments">
+<mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>Assignment : {{ass.TaskName}}</mat-card-title>
@@ -26,4 +39,7 @@ Add Assignment
   <br />
   <button mat-raised-button color="accent" (click)="deleteAssignment(ass)" style="margin: 1%;">Delete</button>
   <button mat-raised-button color="accent" (click)="downloadResults(ass)" style="margin: 1%;">Download Responses</button>
-  <mat-card-content>
+  <mat-card-content> </mat-card-content>
+</mat-card> 
+<mat-divider vertical style="height:30px"></mat-divider>
+ </div>

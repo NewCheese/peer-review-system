@@ -13,7 +13,7 @@ import {CommonfunctionsService} from '../commonfunctions.service'
   styleUrls: ['./template.component.css']
 })
 export class TemplateComponent implements OnInit {
-  displayedColumns: string[] = ['ID', 'Name','Description','TemplateType','CreationDate','edit','del'];
+  displayedColumns: string[] = ['Name','Description','TemplateType','CreationDate','edit','del'];
   public dataSource = new MatTableDataSource<Template>();
   closeModal: string;
 
@@ -29,10 +29,8 @@ export class TemplateComponent implements OnInit {
   public  viewResults() : any{
     this.apiService.viewTemplates()
     .subscribe((res)=>{
-      console.log(res);
       this.dataSource.data = res;
     })
-  
   }
   public setTemplate(val){
     if(val=="0"){

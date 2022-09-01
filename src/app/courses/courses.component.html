@@ -1,12 +1,22 @@
 
-<button mat-stroked-button (click)="openPopUp()" >Add Course</button>
-
-
 
 <mat-divider vertical style="height:30px"></mat-divider>
+<mat-card class="example-card" style="margin-left: 3%; width:88%;">
+  <h2>
+    Dashboard
+  </h2>
+  <h4>
+    This page displays all the modules.  <br>
+    It can be used to add students, view assignments, edit module or delete module.
+  </h4>
+  
+       <button mat-stroked-button (click)="openPopUp()" >Add Module</button>
+  
+</mat-card> 
+<mat-divider vertical style="height:30px"></mat-divider>
 
-
-<mat-card  *ngFor="let ass of allCourses">
+<div *ngFor="let ass of allCourses"  style="margin-left: 3%; width:88%;">
+<mat-card>
   <mat-card-header>
     <div mat-card-avatar></div>
     <mat-card-title>Module : {{ass.CourseName}}</mat-card-title>
@@ -19,27 +29,22 @@
   
   </mat-card-header>
 
-  <button mat-raised-button color="accent" style="margin: 1%;">
-    <a routerLink="/addStudents" [state]="ass">
+  <button mat-raised-button color="accent"  style="margin: 1%;" routerLink="/addStudents" [state]="ass">
      Manage Students 
-    </a> 
   </button>
 
-  <button mat-raised-button color="accent" style="margin: 1%;" *ngIf="ass.hasAssignment">
+  <button mat-raised-button color="accent" style="margin: 1%;" *ngIf="ass.hasAssignment" routerLink="/assignment" [state]="ass" >
     <mat-icon>work</mat-icon>
-    <a routerLink="/assignment" [state]="ass" >
     View Assignment
-    </a>  
   </button>
-  <button mat-raised-button color="accent" style="margin: 1%;" *ngIf="!ass.hasAssignment">
-    <mat-icon>work</mat-icon>
-    <a routerLink="/create/assignment" [state]="ass" >
+  <button mat-raised-button color="accent" style="margin: 1%;" *ngIf="!ass.hasAssignment" routerLink="/create/assignment" [state]="ass" >
     Add an Assignment
-    </a>  
   </button>
   <br />
 
   <button mat-raised-button color="accent" (click)="editCourse(ass)" style="margin: 1%;">Edit</button>
-        
-  <button mat-stroked-button color="accent" (click)="deleteCourse(ass)">Delete</button>
-  <mat-card-content>
+
+  <button mat-raised-button color="accent" (click)="deleteCourse(ass)">Delete</button>
+</mat-card>  
+<mat-divider vertical style="height:30px"></mat-divider>
+  </div>

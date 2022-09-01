@@ -1,0 +1,21 @@
+<div style="width: 130%;">
+    <h3>
+        Rate the Peer review out of 5 stars
+    </h3>
+    <div class="col-sm-12">
+        <ul class="list-inline rating-list" 
+            *ngFor="let star of stars" style="display: inline-block" >
+              <li (click)="countStar(star)"
+                  [ngClass]="{'selected': (star <= selectedValue)}">
+                  <i class="fa fa-star"></i>
+              </li> 
+        </ul>
+    </div>
+    <button class="btn btn-primary" id="yes" (click)="confirm(selectedValue)" style="margin-right:3%">
+        Rate
+    </button>
+    
+    <button class="btn btn-primary" id="yes" (click)="cancel()" >
+        Cancel
+    </button>
+  </div>

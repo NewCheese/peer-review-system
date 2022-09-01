@@ -46,6 +46,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SetProfileComponent } from './set-profile/set-profile.component';
 import { MatFileUploadModule } from 'angular-material-fileupload';
 import { DarkModeService } from 'angular-dark-mode';
+import { RatePopupComponent } from './rate-popup/rate-popup.component';
+import { MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +70,8 @@ import { DarkModeService } from 'angular-dark-mode';
     ManageStudentsPopUpComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    SetProfileComponent
+    SetProfileComponent,
+    RatePopupComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +98,8 @@ import { DarkModeService } from 'angular-dark-mode';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFileUploadModule
+    MatFileUploadModule,
+    MatMenuModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

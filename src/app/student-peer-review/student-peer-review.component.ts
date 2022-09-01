@@ -54,7 +54,6 @@ export class StudentPeerReviewComponent implements OnInit {
   }
 
   public peerReviewSubmission(){
-    console.log(this.newArray);
     var c  = 1;
     console.log(this.allSubmissions[0].ID);
     for(var v in this.newArray){
@@ -85,8 +84,6 @@ export class StudentPeerReviewComponent implements OnInit {
     console.log("Function");
     this.apiService.getPeerReviewSubmissions(this.state.AssignmentID,Number(localStorage.getItem("ID")))
     .subscribe((res)=>{
-      console.log("Peer Reviewed");
-      console.log(res);
      if(res["message"] == 1){
       this.disableConidition =  false;
      }

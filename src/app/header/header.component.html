@@ -1,25 +1,37 @@
 <mat-toolbar color="accent">
     <mat-toolbar-row>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="sideNavBar($event)">
         <mat-icon>menu</mat-icon>
       </button>
-      <h1> Peer Review System</h1>
+      <h1 style="margin-right:1%" > Code Peer Review System</h1>
       <span class="menu-spacer"></span>
-      <div>
-        <a mat-button *ngIf="this.userType == 'Teacher'"   [routerLink]="'/course'"> Courses </a>
-        <a mat-button *ngIf="this.userType == 'Teacher'"  [routerLink]="'/template'"> Peer review templates </a>
-        <a mat-button *ngIf="this.userType == 'Student'" [routerLink]="'/student/courses'"> Enrolled Modules </a>
-        <a mat-button (click)="logout()"> Log out </a>
-      </div>
-      <input
-  id="darkMode"
-  type="checkbox"
-  [checked]="darkMode$ | async"
-  (change)="this.onToggle()"
-  class="toggle"
-/>
+    
+        <button mat-button *ngIf="this.userType == 'Teacher'"   [routerLink]="'/course'" style="margin-right:1%"> Modules </button>
+        <button  mat-button *ngIf="this.userType == 'Teacher'"  [routerLink]="'/template'" style="margin-right:1%"> Templates </button >
+        <button  mat-button *ngIf="this.userType == 'Student'" [routerLink]="'/student/courses'" style="margin-right:1%"> Enrolled Modules </button >
+          
+        <span class="fill-space"></span>
+
+
+
+        <button mat-button [matMenuTriggerFor]="menu">Profile</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>{{this.userID}}</button>
+          <button  mat-menu-item (click)="this.onToggle()"> Dark Mode </button >
+          <button  mat-menu-item (click)="logout()"> Logout </button >
+        </mat-menu>
+        
+        <!--  -->
+
 
     </mat-toolbar-row>
   </mat-toolbar>
 
+<!--   
+  <mat-toolbar >
+    <span>Application Title</span>
   
+    <span class="fill-space"></span>
+  
+    <span>Right Aligned Text</span>
+  </mat-toolbar> -->
