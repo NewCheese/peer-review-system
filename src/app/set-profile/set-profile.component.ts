@@ -70,6 +70,7 @@ export class SetProfileComponent implements OnInit {
         return currentPasswordStrength;
     }
   ngOnInit(): void {
+    console.log("Landed");
     this.route.queryParams.subscribe(params => {
    this.id = params["ID"];
   });

@@ -43,6 +43,8 @@ export class ManageStudentsComponent implements OnInit {
     this.apiService.enrolledStudents(this.state.ID)
     .subscribe((res)=>{
       this.dataSource.data = res;
+      console.log("Data got");
+      console.log(res);
     })
   
   }
