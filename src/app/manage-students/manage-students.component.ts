@@ -7,7 +7,7 @@ import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import {CommonfunctionsService} from '../commonfunctions.service'
 import {saveAs} from "file-saver";
-
+import { ViewChild , ElementRef} from '@angular/core';
 @Component({
   selector: 'app-manage-students',
   templateUrl: './manage-students.component.html',
@@ -17,6 +17,7 @@ export class ManageStudentsComponent implements OnInit {
   displayedColumns: string[] = ['StudentID', 'StudentName','Status'];
   public dataSource = new MatTableDataSource<studentCourses>();
   closeModal: string;
+  @ViewChild('fileupload') myInputVariable: ElementRef;
   state ;
     constructor(private apiService: ApiServicesService,private dialogRef : MatDialog,
       @Inject(DOCUMENT) private domDocument: Document,
@@ -133,9 +134,6 @@ return("Pending");
     var i = 0;
     if(files && files.length > 0) {
        let file : File = files.item(0); 
-         console.log(file.name);
-         console.log(file.size);
-         console.log(file.type);
          let reader: FileReader = new FileReader();
          reader.readAsText(file);
          reader.onload = (e) => {
@@ -146,12 +144,16 @@ return("Pending");
            for(var row in csvRecordsArray){
              
             if(i==0){
+              
               let ans =  csvRecordsArray[row].split(",");
               console.log(ans);
               if(ans.length >1){
                 this.commonfunction.openSnackBar("Invalid CSV Format");
               }
               i = 1;
+              
+              this.myInputVariable.nativeElement.value = "";
+            
               continue;
             }
             var result = csvRecordsArray[row]

@@ -15,8 +15,8 @@
   </mat-card-content>
   <button mat-stroked-button (click)="openPopUp()" style="margin-right: 3%;">Add Students</button> 
   <button mat-stroked-button (click)="downloadTemplate()">Download Template</button>  <br >
-  <button mat-stroked-button (click)="addStudents()" style="margin-top: 2%;">Import CSV File
-  <input type="file" class="upload" accept=".csv" (change)="changeListener($event.target.files)">
+  <button mat-stroked-button (click)="addStudents()" style="margin-top: 2%;" >Import CSV File
+  <input type="file" class="upload" accept=".csv"  #fileupload (change)="changeListener($event.target.files)">
 </button>
 </mat-card> 
 <mat-divider vertical style="height:30px"></mat-divider>
